@@ -43,7 +43,7 @@ jobs:
       # Step 5: Initialize Terraform.
       - name: Terraform Init
         working-directory: cloud-integrations/two-sum/terraform
-        run: terraform init
+        run: terraform init -reconfigure
 
       # Step 6: Run Terraform Plan.
       - name: Terraform Plan
