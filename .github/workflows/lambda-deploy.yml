@@ -1,0 +1,56 @@
+name: Lambda Deploy
+
+# Trigger this workflow when changes are made in the cloud integration directory or the packaging script,
+# or manually using the workflow_dispatch event.
+on:
+  push:
+    paths:
+      - "cloud-integrations/two-sum/**"
+      - "scripts/package_lambda.sh"
+      - ".github/workflows/lambda-deploy.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS credentials.
+      # Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are added to your GitHub Secrets.
+      - name: Set up AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      # Step 3: Package the Lambda function.
+      # This calls the package_lambda.sh script in the scripts folder.
+      - name: Package Lambda Function
+        working-directory: scripts
+        run: ./package_lambda.sh
+
+      # Step 4: Set up Terraform.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      # Step 5: Initialize Terraform.
+      - name: Terraform Init
+        working-directory: cloud-integrations/two-sum/terraform
+        run: terraform init
+
+      # Step 6: Run Terraform Plan.
+      - name: Terraform Plan
+        working-directory: cloud-integrations/two-sum/terraform
+        run: terraform plan
+
+      # Step 7: Apply Terraform configuration (deploy the Lambda and API Gateway).
+      - name: Terraform Apply
+        working-directory: cloud-integrations/two-sum/terraform
+        run: terraform apply -auto-approve

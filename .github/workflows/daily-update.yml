@@ -1,0 +1,20 @@
+name: Daily Update
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update README
+        run: |
+          echo "## Latest Commit" > README.md
+          git log -1 --pretty=format:"%h - %s" >> README.md
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add README.md
+          git commit -m "Auto-update README" || echo "No changes to commit"
+          git push

@@ -1,0 +1,35 @@
+name: Python Tests
+
+# Trigger the workflow when code changes occur in the algorithm folder or when this workflow file changes.
+on:
+  push:
+    paths:
+      - "leetcode-solutions/two-sum/**"
+      - ".github/workflows/python-tests.yml"
+  pull_request:
+    paths:
+      - "leetcode-solutions/two-sum/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository so the runner has access to your code.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python with a specific version (3.8 in this case).
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      # Step 3: (Optional) Install dependencies if needed.
+      # Uncomment if you add a requirements.txt in the two-sum algorithm folder.
+      # - name: Install Dependencies
+      #   run: pip install -r leetcode-solutions/two-sum/requirements.txt
+
+      # Step 4: Run the test runner script.
+      - name: Run Tests
+        run: python leetcode-solutions/two-sum/test_runner.py
