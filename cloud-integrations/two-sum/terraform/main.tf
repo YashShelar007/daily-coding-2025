@@ -5,6 +5,14 @@ terraform {
       version = "~> 4.0"
     }
   }
+
+  backend "s3" {
+    bucket         = "my-dc-terraform-state-bucket-2025"  # Your S3 bucket name
+    key            = "two-sum/terraform.tfstate"       # Path within the bucket
+    region         = "us-east-1"                       # Region of the S3 bucket
+    dynamodb_table = "terraform-lock-table"            # Your DynamoDB table
+    encrypt        = true                              # Encrypt state at rest
+  }
 }
 
 provider "aws" {
