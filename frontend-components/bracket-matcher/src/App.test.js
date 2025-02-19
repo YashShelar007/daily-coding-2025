@@ -1,4 +1,4 @@
-import isValidBracketString from "./App"; // We'll slightly refactor so we can export the function alone
+import { isValidBracketString } from "./App"; // We'll slightly refactor so we can export the function alone
 
 // If you'd like to test the internal function, you can export it separately in App.js:
 //
