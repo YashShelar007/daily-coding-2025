@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function isValidBracketString(str) {
+export function isValidBracketString(str) {
   // This is the same logic as our Python solution, but in JavaScript.
   const mapping = {
     ")": "(",
