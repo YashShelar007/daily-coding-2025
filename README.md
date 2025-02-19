@@ -17,6 +17,13 @@ This monorepo showcases daily projects that combine algorithm challenges (from L
   - Package the Lambda with: `./scripts/package_lambda.sh`
   - Deploy using Terraform in `cloud-integrations/two-sum/terraform/`
   
+## Day 2 – Valid Parentheses & Front-End Demo
+- **LeetCode Problem**: Valid Parentheses 
+- **Algorithm Implementation**: Located at `leetcode-solutions/valid-parentheses`
+  - Run tests using: `python leetcode-solutions/valid-parentheses/test_runner.py`
+- **Front-End Component**: `frontend-components/bracket-matcher` (React).
+  - Live checks bracket strings for validity.
+
 ## How to Contribute
 Follow our commit guidelines using tags:
 - `#leetcode` for algorithm changes
