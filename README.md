@@ -9,7 +9,7 @@ This monorepo showcases daily projects that combine algorithm challenges (from L
 - **scripts/**: Utility scripts (e.g., packaging Lambda functions).
 - **.github/workflows/**: CI/CD workflows for testing and deployment.
 
-## Day 1 – Two Sum Challenge
+## Day 1 – Two Sum & Cloud Integration
 - **LeetCode Problem:** Two Sum
 - **Algorithm Implementation:** Located at `leetcode-solutions/two-sum/`
   - Run tests using: `python leetcode-solutions/two-sum/test_runner.py`
@@ -17,7 +17,7 @@ This monorepo showcases daily projects that combine algorithm challenges (from L
   - Package the Lambda with: `./scripts/package_lambda.sh`
   - Deploy using Terraform in `cloud-integrations/two-sum/terraform/`
   
-## Day 2 – Valid Parentheses & Front-End Demo
+## Day 2 – Valid Parentheses & Front-End Webapp
 - **LeetCode Problem**: Valid Parentheses 
 - **Algorithm Implementation**: Located at `leetcode-solutions/valid-parentheses`
   - Run tests using: `python leetcode-solutions/valid-parentheses/test_runner.py`
